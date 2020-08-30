@@ -10,8 +10,8 @@ services:
         ports:
             - "8000:8000"
         command: gunicorn -w 1 -b :8000 app:app
-        # volumes:
-        #     - ./myappFile:/home/project/myapp
+        volumes:
+            - ./myapp:/home/project/myapp
         networks:
             - app-network
 
