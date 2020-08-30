@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  myapp:
+    container_name: myapp
+    restart: always
+    image: myapp-python
+    build: ./myapp
+    ports:
+      - "8000:8000"
+    command: gunicorn -w 1 -b :8000 app:app
+    networks:
+      - app-network
+
+  nginx:
+    container_name: nginx
+    restart: always
+    image: myapp-nginx
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - myapp
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
