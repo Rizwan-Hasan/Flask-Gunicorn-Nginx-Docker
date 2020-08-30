@@ -4,14 +4,14 @@ services:
     myapp:
         container_name: myapp
         restart: always
-        image: myapp-python
+        image: myapp-flask
         env_file: .env
         build: ./myapp
         ports:
             - "8000:8000"
         command: gunicorn -w 1 -b :8000 app:app
-        volumes:
-            - ./myapp:/home/project/myapp
+        # volumes:
+        #     - ./myapp:/home/project/myapp
         networks:
             - app-network
 
