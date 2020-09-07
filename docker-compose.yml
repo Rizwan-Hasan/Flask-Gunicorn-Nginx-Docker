@@ -9,7 +9,9 @@ services:
         build: ./myapp
         ports:
             - "8000:8000"
-        command: gunicorn -w 1 -b :8000 app:app
+        command: gunicorn --name 'myapp' -w 1 -b :8000 app:app -k gevent --log-file /tmp/gunicorn/logs/gunicorn.log
+        volumes:
+            - ./logs/gunicorn:/tmp/gunicorn/logs
         # volumes:
         #     - ./myapp:/home/project/myapp
         networks:
