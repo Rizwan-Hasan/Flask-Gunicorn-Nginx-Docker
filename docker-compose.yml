@@ -11,7 +11,7 @@ services:
             - "8000:8000"
         command: gunicorn --name 'myapp' -w 1 -b :8000 app:app -k gevent --log-file /tmp/gunicorn/logs/gunicorn.log
         volumes:
-            - ./logs/gunicorn:/tmp/gunicorn/logs
+            - ${WEBAPP_STORAGE_HOME}/logs/gunicorn:/tmp/gunicorn/logs
         # volumes:
         #     - ./myapp:/home/project/myapp
         networks:
@@ -26,7 +26,7 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./logs/nginx:/var/log/nginx
+            - ${WEBAPP_STORAGE_HOME}/logs/nginx:/var/log/nginx
         depends_on:
             - myapp
         networks:
